@@ -1,0 +1,35 @@
+{
+"dataTitle": {
+    "last_guid": 38
+},
+"dataArray": {
+    "obj1": {
+        "id": 1,
+        "name": "Simon"
+    },
+    "obj2": {
+        "id": 2,
+        "name": "Axel"
+    },
+    "obj7": {
+        "id": 3,
+        "name": "Ivon"
+    },
+    "obj8": {
+        "id": 4,
+        "name": "Tony"
+    },
+    "obj9": {
+        "id": 5,
+        "name": "Mary"
+    },
+    "obj10": {
+        "id": 6,
+        "name": "Helga"
+    },
+    "obj11": {
+        "id": 7,
+        "name": "Iren"
+    }
+}
+}

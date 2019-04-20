@@ -24,7 +24,7 @@ class JsonFileAccessModel extends FileAccessModel
 
     public function writeObjArr($array = [])
     {
-        return $this->write($array);
+        return $this->writeJson($array);
     }
 
 }

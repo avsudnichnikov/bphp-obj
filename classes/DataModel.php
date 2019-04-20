@@ -12,7 +12,7 @@ class DataModel
 
     public function __construct()
     {
-        $this->data = new DataArray(strtolower(static::class));
+        $this->data = new JsonObjDataModel(strtolower(static::class));
         $this->create();
     }
 

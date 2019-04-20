@@ -1,35 +1,37 @@
 {
-"dataTitle": {
-    "last_guid": 38
-},
-"dataArray": {
-    "obj1": {
-        "id": 1,
-        "name": "Simon"
+  "dataTitle": {
+    "last_guid": 15
+  },
+  "dataArray": {
+    "o2": {
+      "name": "Zed",
+      "email": "ew3wes@gnomail.com",
+      "rate": 29
     },
-    "obj2": {
-        "id": 2,
-        "name": "Axel"
+    "o5": {
+      "name": "Ilon",
+      "email": "i-lon.not.musk@yoho.com",
+      "rate": 14
     },
-    "obj7": {
-        "id": 3,
-        "name": "Ivon"
+    "o8": {
+      "name": "Bruce",
+      "email": "ironman@sucks.imho",
+      "rate": 24
     },
-    "obj8": {
-        "id": 4,
-        "name": "Tony"
+    "o9": {
+      "name": "Max",
+      "email": "vvvladimirov@rkka.su",
+      "rate": 54
     },
-    "obj9": {
-        "id": 5,
-        "name": "Mary"
+    "o10": {
+      "name": "Ann",
+      "email": "coold@heart.aq",
+      "rate": 25
     },
-    "obj10": {
-        "id": 6,
-        "name": "Helga"
-    },
-    "obj11": {
-        "id": 7,
-        "name": "Iren"
+    "o11": {
+      "name": "Irene",
+      "email": "irene@myself.me",
+      "rate": 24
     }
-}
+  }
 }

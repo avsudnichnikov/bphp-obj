@@ -14,14 +14,13 @@ require './prettyPrint.php';
 </head>
 <body>
     <?
-        $test = new User();
+        $test = new JsonObjDataModel('user');
 
-        $test->name = 'Igor';
-        $test->id = 15;
 
-        pretty_print($test);
-        var_dump($test->get());
-        $test->commit();
+        //pretty_print($test->all()->get());
+        pretty_print($test->all()->sortBy('name',true)->get());
+
+        // $test->commit();
 //        echo '<hr>';
 //        var_dump($test->select()->where('guid_0000000002','18-26-00'));
     ?>

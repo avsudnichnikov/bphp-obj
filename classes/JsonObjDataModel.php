@@ -13,8 +13,17 @@ class JsonObjDataModel
     private $query;
 
     const GUID_PREFIX = 'o';
+
     const SORT_DIRECTION_FORWARD = true;
     const SORT_DIRECTION_BACKWORD = false;
+
+    const GET_WITH_GUID = true;
+    const GET_WITHOUT_GUID = false;
+
+    const PARAM_TYPE_NULL = 0;
+    const PARAM_TYPE_NUMERIC = 1;
+    const PARAM_TYPE_STRING = 2;
+    const PARAM_TYPE_UNSORTED = 3;
 
     public function __construct($dataModelName)
     {
@@ -48,11 +57,18 @@ class JsonObjDataModel
         return $this->query;
     }
 
-    public function get()
+    public function get($withGuid = self::GET_WITHOUT_GUID)
     {
         $result = [];
-        foreach ($this->query as $guid) {
-            $result[$guid] = $this->dataArray[$guid];
+        if ($withGuid) {
+            foreach ($this->query as $guid) {
+                $result[$guid] = $this->dataArray[$guid];
+            }
+        } else {
+            $counter = 0;
+            foreach ($this->query as $guid) {
+                $result[$counter++] = $this->dataArray[$guid];
+            }
         }
         return $result;
     }
@@ -80,6 +96,13 @@ class JsonObjDataModel
         $this->dataArray[$guid] = $obj;
         $this->query = [$guid];
         return $guid;
+    }
+
+    public function changeParam($param, $new_value)
+    {
+        foreach ($this->query as $obj){
+            $obj->$param = $new_value;
+        }
     }
 
     public function delete()
@@ -148,7 +171,13 @@ class JsonObjDataModel
         $right_arr = [];
 
         for ($i = 1; $i < $count; $i++) {
-            if ($this->dataArray[$arr[$i]]->$param <= $this_param_val) {
+            if (
+                !(
+                    ($this_param_val === null) ||
+                    ($this->dataArray[$arr[$i]]->$param === null)
+                ) &&
+                ($this->dataArray[$arr[$i]]->$param <= $this_param_val)
+            ) {
                 $left_arr[] = $arr[$i];
             } else {
                 $right_arr[] = $arr[$i];
@@ -174,7 +203,13 @@ class JsonObjDataModel
         $right_arr = [];
 
         for ($i = 1; $i < $count; $i++) {
-            if (strcasecmp($this->dataArray[$arr[$i]]->$param, $this_param_val)) {
+            if (
+                !(
+                    ($this_param_val === null) ||
+                    ($this->dataArray[$arr[$i]]->$param === null)
+                ) &&
+                (strcasecmp($this->dataArray[$arr[$i]]->$param, $this_param_val))
+            ) {
                 $left_arr[] = $arr[$i];
             } else {
                 $right_arr[] = $arr[$i];
@@ -187,20 +222,45 @@ class JsonObjDataModel
         return array_merge($left_arr, [$this_guid], $right_arr);
     }
 
-    public function sortBy($param, $direction_forward = self::SORT_DIRECTION_FORWARD)
+    private function identifyParamType($param, $iteration = 0, $max = null)
     {
-        $param_example = $this->dataArray[$this->query[0]]->$param;
-        if (is_string($param_example) || is_numeric($param_example)) {
-            if (is_string($param_example)) {
+        $paramExample = $this->dataArray[$this->query[$iteration]]->$param;
+        if (is_null($max)) {
+            $max = $this->count();
+        }
+        if (is_null($paramExample)) {
+            if (($iteration + 1) < $max) {
+                $this->identifyParamType($param, $iteration + 1, $max);
+            } else return self::PARAM_TYPE_NULL;
+        }
+        if (is_numeric($paramExample)) {
+            return self::PARAM_TYPE_NUMERIC;
+        }
+        if (is_string($paramExample)) {
+            return self::PARAM_TYPE_STRING;
+        }
+        return self::PARAM_TYPE_UNSORTED;
+    }
+
+    public function orderBy($param, $direction_forward = self::SORT_DIRECTION_FORWARD)
+    {
+        $param_type = $this->identifyParamType($param);
+        if ($param_type === self::PARAM_TYPE_NUMERIC || $param_type === self::PARAM_TYPE_STRING) {
+            if ($param_type === self::PARAM_TYPE_NUMERIC) {
                 $this->query = $this->numeric_sort($this->query, $param);
-            }
-            if (is_numeric($param_example)) {
+            } else {
                 $this->query = $this->string_sort($this->query, $param);
             }
-            if (!$direction_forward){
-                $this->query = array_reverse ($this->query);
+            if (!$direction_forward) {
+                $this->query = array_reverse($this->query);
             }
         }
+        return $this;
+    }
+
+    public function limit($limit)
+    {
+        $this->query = array_slice($this->query, 0, $limit);
         return $this;
     }
 }

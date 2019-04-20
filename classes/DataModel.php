@@ -7,48 +7,37 @@
 
 class DataModel
 {
-    private $guid;
     private $data;
+    private $guid;
 
     public function __construct()
     {
         $this->data = new JsonObjDataModel(strtolower(static::class));
-        $this->create();
+        $this->guid = $this->data->add($this);
     }
 
-    public function create()
+    public function myself()
     {
-        $this->guid = $this->data->insert($this);
+        return $this->data->all()->byGuid($this->guid)->get()[0];
     }
 
-    public function get()
+    public function getGuid()
     {
-        return $this->data->query()->getByGuid($this->guid);
+        return $this->guid;
     }
 
-    public function set($obj)
+    public function getData()
     {
-        $this->data->changeByGuid($this->guid, $obj);
+        return $this->data;
     }
 
-    public function findFirst()
-    {
-        $this->guid = $this->data->query()->getFirstGuid();
-        return $this->data[$this->guid];
-    }
-
-    public function query()
-    {
-        return $this->data->query();
-    }
-
-    public function delete()
-    {
-        $this->data->deleteByGuid($this->guid);
-    }
-
-    public function commit()
+    public function save()
     {
         $this->data->save();
+    }
+
+    public function findFirst($param, $value, $findLike = false)
+    {
+        $this->data->all()->find($param, $value, $findLike)->first();
     }
 }

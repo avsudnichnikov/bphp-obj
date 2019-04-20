@@ -14,15 +14,10 @@ require './prettyPrint.php';
 </head>
 <body>
     <?
-        $test = new JsonObjDataModel('user');
-
-
-        //pretty_print($test->all()->get());
-        pretty_print($test->all()->sortBy('name',true)->get());
-
-        // $test->commit();
-//        echo '<hr>';
-//        var_dump($test->select()->where('guid_0000000002','18-26-00'));
+        $user = new User();
+        $user->name = 'Aang';
+        //$user->save();
+        pretty_print($user->getData()->all()->get());
     ?>
 </body>
 </html>

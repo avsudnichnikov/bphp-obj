@@ -7,11 +7,7 @@
 
 class User extends DataModel
 {
-    public $id;
     public $name;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    public $email;
+    public $rate;
 }

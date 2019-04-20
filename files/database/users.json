@@ -1,37 +1,37 @@
 {
-  "dataTitle": {
-    "last_guid": 15
-  },
-  "dataArray": {
-    "o2": {
-      "name": "Zed",
-      "email": "ew3wes@gnomail.com",
-      "rate": 29
+    "dataTitle": {
+        "last_guid": 13
     },
-    "o5": {
-      "name": "Ilon",
-      "email": "i-lon.not.musk@yoho.com",
-      "rate": 14
-    },
-    "o8": {
-      "name": "Bruce",
-      "email": "ironman@sucks.imho",
-      "rate": 24
-    },
-    "o9": {
-      "name": "Max",
-      "email": "vvvladimirov@rkka.su",
-      "rate": 54
-    },
-    "o10": {
-      "name": "Ann",
-      "email": "coold@heart.aq",
-      "rate": 25
-    },
-    "o11": {
-      "name": "Irene",
-      "email": "irene@myself.me",
-      "rate": 24
+    "dataArray": {
+        "o2": {
+            "name": "Zed",
+            "email": "ew3wes@gnomail.com",
+            "rate": 81
+        },
+        "o5": {
+            "name": "Ilon",
+            "email": "i-lon.not.musk@yoho.com",
+            "rate": 78
+        },
+        "o8": {
+            "name": "Bruce",
+            "email": "ironman@sucks.imho",
+            "rate": 92
+        },
+        "o9": {
+            "name": "Max",
+            "email": "vvvladimirov@rkka.su",
+            "rate": 86
+        },
+        "o10": {
+            "name": "Ann",
+            "email": "coold@heart.aq",
+            "rate": 95
+        },
+        "o11": {
+            "name": "Irene",
+            "email": "irene@myself.me",
+            "rate": 99
+        }
     }
-  }
 }

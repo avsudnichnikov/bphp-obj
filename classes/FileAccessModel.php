@@ -17,7 +17,7 @@ class FileAccessModel
 
     private function connect()
     {
-        $this->file = fopen($this->fileName, 'r+');
+        $this->file = fopen($this->fileName, 'rt+');
     }
 
     private function disconnect()
@@ -38,6 +38,7 @@ class FileAccessModel
     {
         $result = false;
         $this->connect();
+        ftruncate($this->file,0);
         if(fwrite($this->file, $data)){
            $result = true;
         };

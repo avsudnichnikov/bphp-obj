@@ -100,7 +100,7 @@ class JsonObjDataModel
 
     public function changeParam($param, $new_value)
     {
-        foreach ($this->query as $obj){
+        foreach ($this->query as $obj) {
             $obj->$param = $new_value;
         }
     }
@@ -172,10 +172,9 @@ class JsonObjDataModel
 
         for ($i = 1; $i < $count; $i++) {
             if (
-                !(
-                    ($this_param_val === null) ||
+                (($this_param_val === null) ||
                     ($this->dataArray[$arr[$i]]->$param === null)
-                ) &&
+                ) xor
                 ($this->dataArray[$arr[$i]]->$param <= $this_param_val)
             ) {
                 $left_arr[] = $arr[$i];
@@ -204,15 +203,16 @@ class JsonObjDataModel
 
         for ($i = 1; $i < $count; $i++) {
             if (
-                !(
+                (
                     ($this_param_val === null) ||
-                    ($this->dataArray[$arr[$i]]->$param === null)
-                ) &&
-                (strcasecmp($this->dataArray[$arr[$i]]->$param, $this_param_val))
+                    ($this->dataArray[$arr[$i]]->$param === null
+                )
+            ) xor
+                strcasecmp($this->dataArray[$arr[$i]]->$param, $this_param_val) > 0
             ) {
-                $left_arr[] = $arr[$i];
-            } else {
                 $right_arr[] = $arr[$i];
+            } else {
+                $left_arr[] = $arr[$i];
             }
         }
 
@@ -230,7 +230,7 @@ class JsonObjDataModel
         }
         if (is_null($paramExample)) {
             if (($iteration + 1) < $max) {
-                $this->identifyParamType($param, $iteration + 1, $max);
+                return $this->identifyParamType($param, $iteration + 1, $max);
             } else return self::PARAM_TYPE_NULL;
         }
         if (is_numeric($paramExample)) {
@@ -248,9 +248,10 @@ class JsonObjDataModel
         if ($param_type === self::PARAM_TYPE_NUMERIC || $param_type === self::PARAM_TYPE_STRING) {
             if ($param_type === self::PARAM_TYPE_NUMERIC) {
                 $this->query = $this->numeric_sort($this->query, $param);
-            } else {
+            };
+            if ($param_type === self::PARAM_TYPE_STRING) {
                 $this->query = $this->string_sort($this->query, $param);
-            }
+            };
             if (!$direction_forward) {
                 $this->query = array_reverse($this->query);
             }
@@ -258,7 +259,8 @@ class JsonObjDataModel
         return $this;
     }
 
-    public function limit($limit)
+    public
+    function limit($limit)
     {
         $this->query = array_slice($this->query, 0, $limit);
         return $this;

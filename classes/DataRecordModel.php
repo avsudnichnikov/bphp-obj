@@ -5,7 +5,7 @@
  * Time: 18:21
  */
 
-class DataModel
+class DataRecordModel
 {
     private $data;
     private $guid;
@@ -18,7 +18,8 @@ class DataModel
 
     public function myself()
     {
-        return $this->data->all()->byGuid($this->guid)->get()[0];
+        $this->data->all()->byGuid($this->guid);
+        return $this->data;
     }
 
     public function getGuid()
@@ -26,12 +27,12 @@ class DataModel
         return $this->guid;
     }
 
-    public function getData()
+    public function data()
     {
         return $this->data;
     }
 
-    public function save()
+    public function commit()
     {
         $this->data->save();
     }
@@ -39,5 +40,6 @@ class DataModel
     public function findFirst($param, $value, $findLike = false)
     {
         $this->data->all()->find($param, $value, $findLike)->first();
+        return $this->data;
     }
 }

@@ -5,7 +5,7 @@
  * Time: 23:56
  */
 
-class User extends DataModel
+class User extends DataRecordModel
 {
     public $name;
     public $email;

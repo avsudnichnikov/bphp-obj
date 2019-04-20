@@ -16,8 +16,12 @@ require './prettyPrint.php';
     <?
         $user = new User();
         $user->name = 'Aang';
-        //$user->save();
-        pretty_print($user->getData()->all()->get());
+        $user->commit();
+        pretty_print($user->data()->all()->orderBy('email')->get());
+        $user->myself()->delete();
+        $user->commit();
+//    $test = new JsonObjDataModel('user');
+//    pretty_print($test->all()->orderBy('name')->get());
     ?>
 </body>
 </html>

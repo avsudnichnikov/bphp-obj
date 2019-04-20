@@ -16,14 +16,14 @@ class DataArray
 
     public function __construct($dataModelName)
     {
-        $this->file = new JsonFileModel($dataModelName);
+        $this->file = new JsonFileAccessModel($dataModelName);
         $this->load();
     }
 
     public function load()
     {
-        $this->dataTitle = $this->file->read()->dataTitle;
-        $this->dataArray = (array)$this->file->read()->dataArray;
+        $this->dataTitle = $this->file->readJson()->dataTitle;
+        $this->dataArray = (array)$this->file->readJson()->dataArray;
     }
 
     public function save()

@@ -158,7 +158,7 @@ class JsonObjDataModel
     }
 
 
-    private function numeric_sort($arr, $param)
+    private function numericSort($arr, $param)
     {
         $count = count($arr);
         if ($count <= 1) {
@@ -183,13 +183,13 @@ class JsonObjDataModel
             }
         }
 
-        $left_arr = $this->numeric_sort($left_arr, $param);
-        $right_arr = $this->numeric_sort($right_arr, $param);
+        $left_arr = $this->numericSort($left_arr, $param);
+        $right_arr = $this->numericSort($right_arr, $param);
 
         return array_merge($left_arr, [$this_guid], $right_arr);
     }
 
-    private function string_sort($arr, $param)
+    private function stringSort($arr, $param)
     {
         $count = count($arr);
         if ($count <= 1) {
@@ -216,8 +216,8 @@ class JsonObjDataModel
             }
         }
 
-        $left_arr = $this->string_sort($left_arr, $param);
-        $right_arr = $this->string_sort($right_arr, $param);
+        $left_arr = $this->stringSort($left_arr, $param);
+        $right_arr = $this->stringSort($right_arr, $param);
 
         return array_merge($left_arr, [$this_guid], $right_arr);
     }
@@ -247,10 +247,10 @@ class JsonObjDataModel
         $param_type = $this->identifyParamType($param);
         if ($param_type === self::PARAM_TYPE_NUMERIC || $param_type === self::PARAM_TYPE_STRING) {
             if ($param_type === self::PARAM_TYPE_NUMERIC) {
-                $this->query = $this->numeric_sort($this->query, $param);
+                $this->query = $this->numericSort($this->query, $param);
             };
             if ($param_type === self::PARAM_TYPE_STRING) {
-                $this->query = $this->string_sort($this->query, $param);
+                $this->query = $this->stringSort($this->query, $param);
             };
             if (!$direction_forward) {
                 $this->query = array_reverse($this->query);

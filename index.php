@@ -13,15 +13,18 @@ require './prettyPrint.php';
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <h3>Создать пользователя</h3>
+    <form action="forms/addNewUser.php" method="POST">
+        <label for="name">Имя: </label><input type="text" name="name" /><br><br>
+        <label for="password">Пароль: </label><input type="text" name="password" /><br><br>
+        <label for="email">Электронная почта: </label><input type="text" name="email" /><br><br>
+        <label for="rate">Рейтинг: </label><input type="text" name="rate" /><br><br>
+        <input type="submit" value="Войти">
+    </form>
+    <hr>
     <?
         $user = new User();
-        $user->name = 'Aang';
-        $user->commit();
-        pretty_print($user->data()->all()->orderBy('email')->get());
-        $user->myself()->delete();
-        $user->commit();
-//    $test = new JsonObjDataModel('user');
-//    pretty_print($test->all()->orderBy('name')->get());
+        $user->displaySortedList();
     ?>
 </body>
 </html>

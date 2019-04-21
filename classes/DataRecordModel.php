@@ -13,13 +13,18 @@ class DataRecordModel
     public function __construct()
     {
         $this->data = new JsonObjDataModel(strtolower(static::class));
-        $this->guid = $this->data->add($this);
     }
 
     public function myself()
     {
         $this->data->all()->byGuid($this->guid);
         return $this->data;
+    }
+
+    public function create()
+    {
+        $this->data->add($this);
+        $this->myself();
     }
 
     public function getGuid()

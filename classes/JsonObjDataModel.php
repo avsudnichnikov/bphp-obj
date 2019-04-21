@@ -35,7 +35,7 @@ class JsonObjDataModel
     {
         $this->dataTitle = $this->file->readJson()->dataTitle;
         $this->dataArray = (array)$this->file->readJson()->dataArray;
-        $this->query();
+        $this->newQuery();
     }
 
     public function save()
@@ -46,18 +46,18 @@ class JsonObjDataModel
         ]);
     }
 
-    public function query()
+    public function newQuery()
     {
         $this->query = array_keys($this->dataArray);
         return $this;
     }
 
-    public function guids()
+    public function getGuids()
     {
         return $this->query;
     }
 
-    public function get($withGuid = self::GET_WITHOUT_GUID)
+    public function getObjs($withGuid = self::GET_WITHOUT_GUID)
     {
         $result = [];
         if ($withGuid) {

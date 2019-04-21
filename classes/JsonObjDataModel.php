@@ -35,7 +35,7 @@ class JsonObjDataModel
     {
         $this->dataTitle = $this->file->readJson()->dataTitle;
         $this->dataArray = (array)$this->file->readJson()->dataArray;
-        $this->all();
+        $this->query();
     }
 
     public function save()
@@ -46,13 +46,13 @@ class JsonObjDataModel
         ]);
     }
 
-    public function all()
+    public function query()
     {
         $this->query = array_keys($this->dataArray);
         return $this;
     }
 
-    public function query()
+    public function guids()
     {
         return $this->query;
     }

@@ -17,7 +17,7 @@ class DataRecordModel
 
     public function myself()
     {
-        $this->data->all()->byGuid($this->guid);
+        $this->data->query()->byGuid($this->guid);
         return $this->data;
     }
 
@@ -44,7 +44,7 @@ class DataRecordModel
 
     public function findFirst($param, $value, $findLike = false)
     {
-        $this->data->all()->find($param, $value, $findLike)->first();
+        $this->data->query()->find($param, $value, $findLike)->first();
         return $this->data;
     }
 }

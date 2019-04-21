@@ -19,7 +19,7 @@ require './prettyPrint.php';
         <label for="password">Пароль: </label><input type="text" name="password" /><br><br>
         <label for="email">Электронная почта: </label><input type="text" name="email" /><br><br>
         <label for="rate">Рейтинг: </label><input type="text" name="rate" /><br><br>
-        <input type="submit" value="Войти">
+        <input type="submit" value="Добавить пользователя">
     </form>
     <hr>
     <?

@@ -14,7 +14,7 @@ require './prettyPrint.php';
 </head>
 <body>
     <h3>Создать пользователя</h3>
-    <form action="forms/addNewUser.php" method="POST">
+    <form action="forms/addUser.php" method="POST">
         <label for="name">Имя: </label><input type="text" name="name" /><br><br>
         <label for="password">Пароль: </label><input type="text" name="password" /><br><br>
         <label for="email">Электронная почта: </label><input type="text" name="email" /><br><br>

@@ -23,8 +23,8 @@ require './prettyPrint.php';
     </form>
     <hr>
     <?
-        $user = new User();
-        $user->displaySortedList();
+        $users = new Users;
+        $users->displaySortedList();
     ?>
 </body>
 </html>

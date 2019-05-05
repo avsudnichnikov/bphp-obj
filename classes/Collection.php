@@ -5,7 +5,7 @@
  * Time: 11:00
  */
 
-class JsonObjDataModel
+class Collection
 {
     private $file;
     private $dataTitle;
@@ -25,8 +25,11 @@ class JsonObjDataModel
     const PARAM_TYPE_STRING = 2;
     const PARAM_TYPE_UNSORTED = 3;
 
-    public function __construct($dataModelName)
+    public function __construct($dataModelName = null)
     {
+        if (is_null($dataModelName)){
+            $dataModelName =  strtolower(static::class);
+        }
         $this->file = new JsonFileAccessModel($dataModelName);
         $this->load();
     }
@@ -103,6 +106,11 @@ class JsonObjDataModel
         foreach ($this->query as $obj) {
             $obj->$param = $new_value;
         }
+    }
+
+    public function changeObjByGuid($guid, $obj)
+    {
+        $this->dataArray[$guid] = $obj;
     }
 
     public function delete()

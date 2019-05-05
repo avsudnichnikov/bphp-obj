@@ -5,46 +5,34 @@
  * Time: 18:21
  */
 
-class DataRecordModel
+abstract class DataRecordModel
 {
-    private $data;
+    private $filename;
     private $guid;
 
     public function __construct()
     {
-        $this->data = new JsonObjDataModel(strtolower(static::class));
-    }
-
-    public function myself()
-    {
-        $this->data->newQuery()->byGuid($this->guid);
-        return $this->data;
-    }
-
-    public function create()
-    {
-        $this->data->add($this);
-        $this->myself();
-    }
-
-    public function getGuid()
-    {
-        return $this->guid;
-    }
-
-    public function data()
-    {
-        return $this->data;
+        $this->filename = strtolower(static::class) . 's';
+        echo $this->filename;
     }
 
     public function commit()
     {
-        $this->data->save();
+        $data = new Collection($this->filename);
+        if (is_null($this->guid)){
+            $this->guid = $data->add($this);
+        } else {
+            $data->changeObjByGuid($this->guid,$this);
+        }
+        $data->save();
     }
 
-    public function findFirst($param, $value, $findLike = false)
+    public function delete()
     {
-        $this->data->newQuery()->find($param, $value, $findLike)->first();
-        return $this->data;
+        $data = new Collection($this->filename);
+        if (!is_null($this->guid)){
+            $this->guid = $data->byGuid($this->guid)->delete();
+        }
+        $data->save();
     }
 }

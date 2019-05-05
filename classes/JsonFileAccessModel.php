@@ -9,7 +9,7 @@ class JsonFileAccessModel extends FileAccessModel
 {
     public function __construct($dataModelName)
     {
-        parent::__construct($_SERVER['DOCUMENT_ROOT'] . Config::DATABASE_PATH . $dataModelName . 's.json');
+        parent::__construct($_SERVER['DOCUMENT_ROOT'] . Config::DATABASE_PATH . $dataModelName . '.json');
     }
 
     public function readJson()

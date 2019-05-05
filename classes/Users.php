@@ -5,7 +5,7 @@
  * Time: 23:44
  */
 
-class Users extends Collection
+class Users extends JsonDataArray
 {
     public function displaySortedList(){
         foreach ($this->newQuery()->orderBy('name')->getObjs() as $item){

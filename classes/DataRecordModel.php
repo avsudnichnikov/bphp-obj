@@ -5,7 +5,7 @@
  * Time: 18:21
  */
 
-abstract class DataRecordModel
+class DataRecordModel
 {
     private $filename;
     private $guid;
@@ -13,12 +13,11 @@ abstract class DataRecordModel
     public function __construct()
     {
         $this->filename = strtolower(static::class) . 's';
-        echo $this->filename;
     }
 
     public function commit()
     {
-        $data = new Collection($this->filename);
+        $data = new JsonDataArray($this->filename);
         if (is_null($this->guid)){
             $this->guid = $data->add($this);
         } else {
@@ -29,7 +28,7 @@ abstract class DataRecordModel
 
     public function delete()
     {
-        $data = new Collection($this->filename);
+        $data = new JsonDataArray($this->filename);
         if (!is_null($this->guid)){
             $this->guid = $data->byGuid($this->guid)->delete();
         }

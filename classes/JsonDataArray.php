@@ -5,7 +5,7 @@
  * Time: 11:00
  */
 
-class Collection
+class JsonDataArray
 {
     private $file;
     private $dataTitle;

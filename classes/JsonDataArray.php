@@ -27,9 +27,7 @@ class JsonDataArray
 
     public function __construct($dataModelName = null)
     {
-        if (is_null($dataModelName)){
-            $dataModelName =  strtolower(static::class);
-        }
+        $dataModelName =  $dataModelName ?? strtolower(static::class);
         $this->file = new JsonFileAccessModel($dataModelName);
         $this->load();
     }
@@ -110,6 +108,13 @@ class JsonDataArray
 
     public function changeObjByGuid($guid, $obj)
     {
+        if (!is_null($this->dataArray[$guid])){
+            foreach ($obj as $param => $value) {
+                $this->dataArray[$guid]->$param = $value;
+            }
+        } else {
+            throw new Error('object not exist');
+        }
         $this->dataArray[$guid] = $obj;
     }
 
@@ -214,8 +219,8 @@ class JsonDataArray
                 (
                     ($this_param_val === null) ||
                     ($this->dataArray[$arr[$i]]->$param === null
-                )
-            ) xor
+                    )
+                ) xor
                 strcasecmp($this->dataArray[$arr[$i]]->$param, $this_param_val) > 0
             ) {
                 $right_arr[] = $arr[$i];
@@ -263,12 +268,13 @@ class JsonDataArray
             if (!$direction_forward) {
                 $this->query = array_reverse($this->query);
             }
+        } else {
+            throw new Error('not ordered field');
         }
         return $this;
     }
 
-    public
-    function limit($limit)
+    public function limit($limit)
     {
         $this->query = array_slice($this->query, 0, $limit);
         return $this;
